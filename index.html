@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Encré par Chemin — Boutique</title>
-  <meta name="description" content="L'environnement préparé de l'autrice. Supports imprimables pour nommer vos séances d'écriture et installer votre plateau." />
+  <meta name="description" content="L'environnement préparé de l'auteur·ice. Supports imprimables pour nommer vos séances d'écriture et installer votre plateau." />
 
   <!--
     ─────────────────────────────────────────────────────────────
@@ -62,6 +62,70 @@
       max-width: 1080px;
       margin: 0 auto;
       padding: 0 24px;
+    }
+
+    /* ───────────────────────────────────────────────
+       ENCART « L'ESPRIT DE LA BOUTIQUE » (philosophie)
+       ─────────────────────────────────────────────── */
+    .spirit {
+      max-width: 860px;
+      margin: 64px auto 0;
+      padding: 0 24px;
+    }
+
+    .spirit-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 44px 40px;
+      box-shadow: 0 12px 30px rgba(45, 45, 45, 0.04);
+    }
+
+    .spirit-card h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .spirit-card .spirit-rule {
+      width: 56px;
+      height: 1px;
+      background: var(--gold-soft);
+      border: none;
+      margin: 0 auto 28px;
+    }
+
+    .spirit-card p {
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+      margin-bottom: 16px;
+    }
+
+    .spirit-card p strong { color: var(--ink); font-weight: 600; }
+
+    .spirit-card .spirit-closing {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--gold);
+      text-align: center;
+      font-size: 1.12rem;
+      margin-top: 6px;
+    }
+
+    /* la grande image des cartes, sous le texte */
+    .spirit-image {
+      margin-top: 32px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f4f1ea;
+    }
+
+    .spirit-image img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     /* ───────────────────────────────────────────────
@@ -452,6 +516,19 @@
     */
     .gallery input { display: none; }
 
+    /* le carnet a des images en portrait : on les affiche en entier (sans rogner) */
+    .gallery-book .product-image {
+      background: #f6f2ea;
+    }
+    .gallery-book .product-image img {
+      object-fit: contain;
+      padding: 10px;
+    }
+    .gallery-book .product-thumbs img {
+      object-fit: contain;
+      background: #f6f2ea;
+    }
+
     /* par défaut, on n'affiche que la 1re grande image */
     .gallery .big-2,
     .gallery .big-3,
@@ -471,6 +548,27 @@
     #img-2:checked ~ .product-thumbs label[for="img-2"],
     #img-3:checked ~ .product-thumbs label[for="img-3"],
     #img-4:checked ~ .product-thumbs label[for="img-4"] {
+      opacity: 1;
+      border-color: var(--gold);
+    }
+
+    /* ─── même mécanique pour le 2e produit (le carnet) ─── */
+    .gallery .vbig-2,
+    .gallery .vbig-3,
+    .gallery .vbig-4 { display: none; }
+
+    #livre-img-1:checked ~ .product-image .vbig-1 { display: block; }
+    #livre-img-2:checked ~ .product-image .vbig-1 { display: none; }
+    #livre-img-2:checked ~ .product-image .vbig-2 { display: block; }
+    #livre-img-3:checked ~ .product-image .vbig-1 { display: none; }
+    #livre-img-3:checked ~ .product-image .vbig-3 { display: block; }
+    #livre-img-4:checked ~ .product-image .vbig-1 { display: none; }
+    #livre-img-4:checked ~ .product-image .vbig-4 { display: block; }
+
+    #livre-img-1:checked ~ .product-thumbs label[for="livre-img-1"],
+    #livre-img-2:checked ~ .product-thumbs label[for="livre-img-2"],
+    #livre-img-3:checked ~ .product-thumbs label[for="livre-img-3"],
+    #livre-img-4:checked ~ .product-thumbs label[for="livre-img-4"] {
       opacity: 1;
       border-color: var(--gold);
     }
@@ -679,6 +777,7 @@
       .product-grid { gap: 24px; }
       .reassurance-grid { grid-template-columns: 1fr; gap: 32px; }
       .navbar .navbar-name { font-size: 1.15rem; }
+      .spirit-card { padding: 32px 24px; }
     }
   </style>
 </head>
@@ -702,7 +801,7 @@
     <div class="hero-frame">
       <img src="hero.png" alt="L'atelier d'écriture — Encré par Chemin" />
       <div class="hero-text">
-        <h2>L'environnement préparé de l'autrice</h2>
+        <h2>L'environnement préparé de l'auteur·ice</h2>
         <p>Des supports doux pour écrire, séance après séance.</p>
       </div>
     </div>
@@ -714,28 +813,63 @@
       <p class="header-overline">Boutique · Documents PDF</p>
       <h1 class="brand">Encré par Chemin</h1>
       <p class="header-subtitle">
-        L'environnement préparé de l'autrice — des supports doux pour
+        L'environnement préparé de l'auteur·ice — des supports doux pour
         nommer chaque séance et apprivoiser la page blanche.
       </p>
       <hr class="rule" />
     </div>
   </header>
 
-  <!-- ═══════════════ COMMENT ÇA MARCHE ═══════════════ -->
+  <!-- ═══════════════ L'ESPRIT DE LA BOUTIQUE (philosophie) ═══════════════
+       👉 Dépose ton visuel des cartes en le nommant : apercu-cartes.png -->
+  <section class="spirit">
+    <div class="spirit-card">
+      <h2>L'esprit de la boutique</h2>
+      <hr class="spirit-rule" />
+
+      <p>
+        Ici, on accompagne l'auteur·ice dans sa pratique quotidienne de l'écriture,
+        avec des outils faits pour être personnalisés. Chaque auteur·ice a sa méthode ;
+        chacune compose donc son propre atelier, à partir des documents, indications
+        et conseils contenus dans les PDF.
+      </p>
+      <p>
+        Chaque PDF est un écosystème à lui seul : <strong>un plateau, un atelier, un objectif</strong>.
+        L'idée est simple — préparer son environnement pour que, le jour où l'envie ou le
+        besoin d'écrire arrive, tout soit déjà là, à portée de main. C'est ce qu'on fait
+        avec une belle cuisine, une bibliothèque, une pile de livres à lire : on dispose
+        les choses autour de soi pour que l'élan, quand il vient, ne se heurte à rien.
+      </p>
+      <p>
+        Imaginez une étagère. Dessus, des plateaux. Dans chaque plateau, de quoi mener
+        un atelier précis. Le premier que je vous propose est le
+        <strong>plateau de l'écriture intentionnelle</strong> : celui qu'on sort de façon
+        rituelle pour écrire — même les jours sans envie. Parce que c'est ainsi qu'on
+        avance, qu'on progresse, et qu'on va au bout de son projet.
+      </p>
+      <p class="spirit-closing">Ces plateaux sont là pour vous mener au terme de ce que vous écrivez.</p>
+
+      <div class="spirit-image">
+        <img src="apercu-cartes.png" alt="Aperçu des cartes du coffret Planches de Session" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ COMMENT ÇA MARCHE (choisir & payer) ═══════════════ -->
   <section class="how">
     <div class="container">
       <h2 class="section-title">Comment ça marche</h2>
       <p class="how-lead">
-        Choisissez vos outils, réglez votre achat en toute sécurité,
-        et recevez vos fichiers PDF aussitôt — à télécharger et à imprimer
-        chez vous, accompagnés d'un petit mot doux.
+        Acquérir vos planches est simple : vous choisissez votre plateau,
+        vous réglez en toute sécurité, et vous recevez vos fichiers PDF aussitôt,
+        à télécharger et à imprimer chez vous.
       </p>
 
       <div class="steps">
         <div class="step">
           <span class="step-num">1</span>
           <h3>Choisir</h3>
-          <p>Sélectionnez le support qui accompagnera vos prochaines séances d'écriture.</p>
+          <p>Parcourez la boutique et sélectionnez le plateau qui vous appelle.</p>
         </div>
         <div class="step">
           <span class="step-num">2</span>
@@ -807,7 +941,7 @@
             <p class="product-tag">Outils d'écriture</p>
             <h3 class="product-title">Coffret « Encré par Chemin »<br />Planches de Session — S1</h3>
             <p class="product-desc">
-              L'environnement préparé de l'autrice. Un ensemble de supports
+              L'environnement préparé de l'auteur·ice. Un ensemble de supports
               imprimables pour nommer vos séances (geste + matière), installer
               votre plateau d'écriture et surmonter la page blanche.
             </p>
@@ -839,6 +973,75 @@
 
         </article>
         <!-- ── FIN DE LA CARTE PRODUIT ── -->
+
+        <!--
+          ┌─────────────────────────────────────────────────────────┐
+          │  CARTE PRODUIT 2 — CARNETS · Avant d'écrire · Volume 1    │
+          └─────────────────────────────────────────────────────────┘
+        -->
+        <article class="product-card">
+
+          <!-- ─── GALERIE D'IMAGES ───
+               👉 Dépose tes 4 images dans le dépôt en les nommant EXACTEMENT :
+                  livre-1.png   (la couverture, affichée par défaut)
+                  livre-2.png   (page 1)
+                  livre-3.png   (page 2)
+                  livre-4.png   (page 3) -->
+          <div class="gallery gallery-book">
+            <input type="radio" name="galerie-v1" id="livre-img-1" checked />
+            <input type="radio" name="galerie-v1" id="livre-img-2" />
+            <input type="radio" name="galerie-v1" id="livre-img-3" />
+            <input type="radio" name="galerie-v1" id="livre-img-4" />
+
+            <div class="product-image">
+              <img class="vbig-1" src="livre-1.png" alt="CARNETS Volume 1 — couverture" />
+              <img class="vbig-2" src="livre-2.png" alt="CARNETS Volume 1 — aperçu page 1" />
+              <img class="vbig-3" src="livre-3.png" alt="CARNETS Volume 1 — aperçu page 2" />
+              <img class="vbig-4" src="livre-4.png" alt="CARNETS Volume 1 — aperçu page 3" />
+            </div>
+
+            <div class="product-thumbs">
+              <label for="livre-img-1"><img src="livre-1.png" alt="Couverture" /></label>
+              <label for="livre-img-2"><img src="livre-2.png" alt="Aperçu page 1" /></label>
+              <label for="livre-img-3"><img src="livre-3.png" alt="Aperçu page 2" /></label>
+              <label for="livre-img-4"><img src="livre-4.png" alt="Aperçu page 3" /></label>
+            </div>
+          </div>
+
+          <div class="product-body">
+            <p class="product-tag">Guide de réflexion</p>
+            <h3 class="product-title">CARNETS — Avant d'écrire<br />Volume 1</h3>
+            <p class="product-desc">
+              Au départ, ce devait être un simple planner. Au fil des pages,
+              c'est devenu autre chose : un guide qui vous accompagne avant même
+              d'écrire la première ligne — pour poser les bonnes questions,
+              clarifier votre intention et définir ce que vous voulez vraiment
+              donner avec votre roman.
+            </p>
+
+            <!-- ─── DÉTAIL DU CONTENU ─── -->
+            <div class="product-details">
+              <h4>Ce que contient ce volume</h4>
+              <ul>
+                <li><span>Réflexion guidée</span><span>10 pages</span></li>
+                <li><span>Genre, intrigue, lecteur imaginaire</span><span>inclus</span></li>
+                <li><span>Identité d'auteur·ice &amp; thème central</span><span>inclus</span></li>
+                <li><span>Romans de référence &amp; objectifs</span><span>inclus</span></li>
+                <li><span>Collection « Encre et Parchemin »</span><span>Vol. 1/12</span></li>
+                <li><span>Format à compléter dans votre carnet</span><span>PDF</span></li>
+              </ul>
+            </div>
+
+            <p class="product-price">3,99 €</p>
+
+            <!-- ─── BOUTON D'ACHAT (GUMROAD) ─── -->
+            <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/idavua" target="_blank" rel="noopener">
+              Acheter le PDF
+            </a>
+          </div>
+
+        </article>
+        <!-- ── FIN DE LA CARTE PRODUIT 2 ── -->
 
       </div>
     </div>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encré par Chemin — Boutique</title>
+  <meta name="description" content="L'environnement préparé de l'autrice. Supports imprimables pour nommer vos séances d'écriture et installer votre plateau." />
+
+  <!--
+    ─────────────────────────────────────────────────────────────
+    POLICE D'ÉCRITURE (facultatif)
+    On charge une seule police serif élégante (Cormorant Garamond)
+    pour les titres, qui rappelle l'univers littéraire / carnets.
+    Le corps de texte reste en sans-serif système (propre et rapide).
+    👉 Si tu veux un site 100 % autonome (sans connexion), supprime
+       simplement la ligne <link> ci-dessous : un serif système prendra le relais.
+    ─────────────────────────────────────────────────────────────
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ───────────────────────────────────────────────
+       PALETTE & VARIABLES
+       (modifie ici pour changer toutes les couleurs d'un coup)
+       ─────────────────────────────────────────────── */
+    :root {
+      --cream:       #fbfaf8;  /* fond de page : papier crème */
+      --card:        #ffffff;  /* fond des cartes produits */
+      --ink:         #2d2d2d;  /* texte principal : gris anthracite doux */
+      --ink-soft:    #6f6b64;  /* texte secondaire / descriptions */
+      --gold:        #b08d57;  /* doré : accents, filets, étiquettes */
+      --gold-soft:   #d8c9ac;  /* doré clair */
+      --border:      #ece8e1;  /* bordures fines */
+      --paypal:      #ffc439;  /* jaune PayPal */
+      --paypal-dark: #f3b400;  /* jaune PayPal au survol */
+      --shadow:      0 12px 30px rgba(45, 45, 45, 0.08);
+
+      --serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+      --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* ─── RÉINITIALISATION DOUCE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background-color: var(--cream);
+      /* léger halo chaleureux en haut de page */
+      background-image: radial-gradient(120% 60% at 50% -10%, #fdfcfa 0%, var(--cream) 60%);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ───────────────────────────────────────────────
+       EN-TÊTE
+       ─────────────────────────────────────────────── */
+    header {
+      text-align: center;
+      padding: 72px 0 56px;
+    }
+
+    .header-overline {
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+    }
+
+    .header-subtitle {
+      max-width: 540px;
+      margin: 18px auto 0;
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+      font-style: italic;
+      font-family: var(--serif);
+    }
+
+    /* petit filet doré décoratif */
+    .rule {
+      width: 56px;
+      height: 1px;
+      background: var(--gold-soft);
+      border: none;
+      margin: 28px auto 0;
+    }
+
+    /* ───────────────────────────────────────────────
+       SECTION « COMMENT ÇA MARCHE »
+       ─────────────────────────────────────────────── */
+    .how {
+      text-align: center;
+      padding: 8px 0 24px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+      margin-bottom: 14px;
+    }
+
+    .how-lead {
+      max-width: 620px;
+      margin: 0 auto 40px;
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .step {
+      padding: 8px 6px;
+    }
+
+    .step-num {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--gold-soft);
+      border-radius: 50%;
+      margin-bottom: 14px;
+    }
+
+    .step h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.18rem;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+    }
+
+    /* ───────────────────────────────────────────────
+       GRILLE DE PRODUITS
+       ─────────────────────────────────────────────── */
+    .shop {
+      padding: 72px 0 40px;
+    }
+
+    .product-grid {
+      display: grid;
+      /* responsive automatique : les cartes se réorganisent seules */
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 32px;
+      margin-top: 44px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--gold-soft);
+    }
+
+    /* ─── GALERIE D'IMAGES PRODUIT ─── */
+
+    /* la grande image (format 16:9, comme tes covers Gumroad 1280×720) */
+    .product-image {
+      aspect-ratio: 16 / 9;
+      background: #f4f1ea;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;            /* l'image remplit joliment le cadre */
+      display: block;
+    }
+
+    /* la rangée de miniatures sous la grande image */
+    .product-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 6px 6px 0;
+      background: var(--card);
+    }
+
+    .product-thumbs label {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s ease, opacity 0.2s ease;
+      opacity: 0.7;
+    }
+
+    .product-thumbs label:hover { opacity: 1; }
+
+    .product-thumbs img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /*
+       Mécanique de la galerie SANS JavaScript :
+       les boutons radio (cachés) pilotent quelle grande image s'affiche.
+       Rien à modifier ici — il suffit de nommer tes images coffret-1..4.png
+    */
+    .gallery input { display: none; }
+
+    /* par défaut, on n'affiche que la 1re grande image */
+    .gallery .big-2,
+    .gallery .big-3,
+    .gallery .big-4 { display: none; }
+
+    /* quand une miniature est cochée, on montre la grande image correspondante */
+    #img-1:checked ~ .product-image .big-1 { display: block; }
+    #img-2:checked ~ .product-image .big-1 { display: none; }
+    #img-2:checked ~ .product-image .big-2 { display: block; }
+    #img-3:checked ~ .product-image .big-1 { display: none; }
+    #img-3:checked ~ .product-image .big-3 { display: block; }
+    #img-4:checked ~ .product-image .big-1 { display: none; }
+    #img-4:checked ~ .product-image .big-4 { display: block; }
+
+    /* la miniature active est mise en valeur (bordure dorée + pleine opacité) */
+    #img-1:checked ~ .product-thumbs label[for="img-1"],
+    #img-2:checked ~ .product-thumbs label[for="img-2"],
+    #img-3:checked ~ .product-thumbs label[for="img-3"],
+    #img-4:checked ~ .product-thumbs label[for="img-4"] {
+      opacity: 1;
+      border-color: var(--gold);
+    }
+
+    .product-body {
+      padding: 26px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .product-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .product-desc {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      flex: 1;                      /* pousse le prix + bouton en bas */
+    }
+
+    .product-price {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    /* ─── BOUTON PAYPAL ─── */
+    .btn-paypal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      background: var(--paypal);
+      color: #1a1a1a;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+
+    .btn-paypal:hover {
+      background: var(--paypal-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ───────────────────────────────────────────────
+       PIED DE PAGE
+       ─────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 56px 0 48px;
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--ink-soft);
+      font-size: 0.86rem;
+    }
+
+    footer .brand-foot {
+      font-family: var(--serif);
+      color: var(--ink);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    footer .note {
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-top: 6px;
+    }
+
+    /* ─── PHRASE D'INVITATION RÉSEAUX ─── */
+    .socials-intro {
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      max-width: 460px;
+      margin: 0 auto 18px;
+    }
+
+    /* ─── ICÔNES RÉSEAUX SOCIAUX ─── */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 0 0 36px;
+    }
+
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--ink);
+      transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    }
+
+    .socials a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .socials svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* ─── ENCART « CE QUE CONTIENT LE COFFRET » ─── */
+    .product-details {
+      background: #faf8f4;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+
+    .product-details h4 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+
+    .product-details ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    .product-details li {
+      padding: 5px 0;
+      border-bottom: 1px dotted var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .product-details li:last-child { border-bottom: none; }
+
+    .product-details li span:last-child {
+      color: var(--gold);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ───────────────────────────────────────────────
+       PETITE ANIMATION D'APPARITION À L'OUVERTURE
+       (discrète, dans l'esprit minimaliste)
+       ─────────────────────────────────────────────── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    header, .how, .shop { animation: rise 0.7s ease both; }
+    .how  { animation-delay: 0.1s; }
+    .shop { animation-delay: 0.2s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ───────────────────────────────────────────────
+       RESPONSIVE (mobile)
+       ─────────────────────────────────────────────── */
+    @media (max-width: 620px) {
+      header { padding: 52px 0 40px; }
+      .steps { grid-template-columns: 1fr; gap: 28px; max-width: 340px; }
+      .shop  { padding: 52px 0 24px; }
+      .product-grid { gap: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════ EN-TÊTE ═══════════════ -->
+  <header>
+    <div class="container">
+      <p class="header-overline">Boutique · Documents PDF</p>
+      <h1 class="brand">Encré par Chemin</h1>
+      <p class="header-subtitle">
+        L'environnement préparé de l'autrice — des supports doux pour
+        nommer chaque séance et apprivoiser la page blanche.
+      </p>
+      <hr class="rule" />
+    </div>
+  </header>
+
+  <!-- ═══════════════ COMMENT ÇA MARCHE ═══════════════ -->
+  <section class="how">
+    <div class="container">
+      <h2 class="section-title">Comment ça marche</h2>
+      <p class="how-lead">
+        Choisissez vos outils, réglez votre achat en toute sécurité,
+        et recevez vos fichiers PDF aussitôt — à télécharger et à imprimer
+        chez vous, accompagnés d'un petit mot doux.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h3>Choisir</h3>
+          <p>Sélectionnez le support qui accompagnera vos prochaines séances d'écriture.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h3>Régler</h3>
+          <p>Un paiement simple et sécurisé, en quelques clics.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h3>Recevoir</h3>
+          <p>Vos PDF sont disponibles immédiatement, à télécharger et à imprimer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ BOUTIQUE (GRILLE PRODUITS) ═══════════════ -->
+  <section class="shop">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;">La boutique</h2>
+
+      <div class="product-grid">
+
+        <!--
+          ┌─────────────────────────────────────────────────────────┐
+          │  CARTE PRODUIT — Coffret Planches de Session (S1)         │
+          │  Pour ajouter d'autres produits plus tard :              │
+          │  copie/colle tout ce bloc <article class="product-card"> │
+          │  ... </article> et modifie l'image, le titre, le prix    │
+          │  et le lien Gumroad (href).                               │
+          └─────────────────────────────────────────────────────────┘
+        -->
+        <article class="product-card">
+
+          <!-- ─── GALERIE D'IMAGES ───
+               👉 Tu n'as RIEN à changer dans le code.
+               Il te suffit de déposer tes 4 images dans le dépôt (au même
+               niveau que index.html) en les nommant EXACTEMENT :
+                  coffret-1.png   (la grande affichée par défaut)
+                  coffret-2.png
+                  coffret-3.png
+                  coffret-4.png
+               Tes covers Gumroad (1280×720) conviennent parfaitement.
+               Clic sur une miniature = elle s'affiche en grand. -->
+          <div class="gallery">
+            <!-- boutons radio cachés qui pilotent l'affichage (le 1er est coché) -->
+            <input type="radio" name="galerie-s1" id="img-1" checked />
+            <input type="radio" name="galerie-s1" id="img-2" />
+            <input type="radio" name="galerie-s1" id="img-3" />
+            <input type="radio" name="galerie-s1" id="img-4" />
+
+            <!-- la grande image (les 4 sont là, une seule s'affiche à la fois) -->
+            <div class="product-image">
+              <img class="big-1" src="coffret-1.png" alt="Coffret Planches de Session S1 — visuel 1" />
+              <img class="big-2" src="coffret-2.png" alt="Coffret Planches de Session S1 — visuel 2" />
+              <img class="big-3" src="coffret-3.png" alt="Coffret Planches de Session S1 — visuel 3" />
+              <img class="big-4" src="coffret-4.png" alt="Coffret Planches de Session S1 — visuel 4" />
+            </div>
+
+            <!-- les miniatures cliquables sous la grande image -->
+            <div class="product-thumbs">
+              <label for="img-1"><img src="coffret-1.png" alt="Aperçu 1" /></label>
+              <label for="img-2"><img src="coffret-2.png" alt="Aperçu 2" /></label>
+              <label for="img-3"><img src="coffret-3.png" alt="Aperçu 3" /></label>
+              <label for="img-4"><img src="coffret-4.png" alt="Aperçu 4" /></label>
+            </div>
+          </div>
+
+          <div class="product-body">
+            <p class="product-tag">Outils d'écriture</p>
+            <h3 class="product-title">Coffret « Encré par Chemin »<br />Planches de Session — S1</h3>
+            <p class="product-desc">
+              L'environnement préparé de l'autrice. Un ensemble de supports
+              imprimables pour nommer vos séances (geste + matière), installer
+              votre plateau d'écriture et surmonter la page blanche.
+            </p>
+
+            <!-- ─── DÉTAIL DU CONTENU (façon fiche matériel) ─── -->
+            <div class="product-details">
+              <h4>Ce que contient le coffret</h4>
+              <ul>
+                <li><span>Cartes « phases » du travail</span><span>6 cartes</span></li>
+                <li><span>Cartes « éléments » du récit</span><span>7 cartes</span></li>
+                <li><span>Cartes-minuteur (25 · 30 · 50 min)</span><span>3 cartes</span></li>
+                <li><span>Pastilles rondes à coller au carnet</span><span>1 planche</span></li>
+                <li><span>Fiches de suivi journalières</span><span>4 / page</span></li>
+                <li><span>Versions couleur &amp; noir et blanc</span><span>PDF</span></li>
+              </ul>
+            </div>
+
+            <p class="product-price">2,99 €</p>
+
+            <!-- ─── BOUTON D'ACHAT (GUMROAD) ───
+                 👉 Ton lien de vente Gumroad est déjà branché ci-dessous.
+                 Pour changer de produit plus tard, remplace simplement l'URL du href.
+                 (Astuce : tu peux rendre le lien plus lisible en renommant l'URL
+                  du produit dans Gumroad, ex. .../l/coffret-s1) -->
+            <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/rwrzw" target="_blank" rel="noopener">
+              Acheter le PDF
+            </a>
+          </div>
+
+        </article>
+        <!-- ── FIN DE LA CARTE PRODUIT ── -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PIED DE PAGE ═══════════════ -->
+  <footer>
+    <div class="container">
+
+      <!-- ─── INVITATION + RÉSEAUX SOCIAUX ───
+           👉 Tes 3 liens sont déjà branchés ci-dessous.
+           Pour les modifier un jour, change l'URL dans chaque href. -->
+      <p class="socials-intro">
+        Retrouvez mes sessions d'écriture en vidéo : comment j'organise
+        mon plateau et j'utilise les cartes, jour après jour.
+      </p>
+
+      <div class="socials">
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@IchiWrites" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/ichi__.writes._books" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.43.7.83.9 1.4.18.45.37 1.06.43 2.26.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 1.8-.43 2.2a3.7 3.7 0 0 1-.9 1.4 3.7 3.7 0 0 1-1.4.9c-.45.18-1.06.37-2.26.43-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-1.8-.25-2.2-.43a3.7 3.7 0 0 1-1.4-.9 3.7 3.7 0 0 1-.9-1.4c-.18-.45-.37-1.06-.43-2.26C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-1.8.43-2.2.22-.6.48-1 .9-1.4.43-.43.83-.7 1.4-.9.45-.18 1.06-.37 2.26-.43C8.4 2.2 8.8 2.2 12 2.2Zm0 1.95c-3.15 0-3.52.01-4.76.07-1.15.05-1.77.24-2.18.4-.55.22-.94.47-1.35.88-.41.41-.66.8-.88 1.35-.16.41-.35 1.03-.4 2.18-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.05 1.15.24 1.77.4 2.18.22.55.47.94.88 1.35.41.41.8.66 1.35.88.41.16 1.03.35 2.18.4 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c1.15-.05 1.77-.24 2.18-.4.55-.22.94-.47 1.35-.88.41-.41.66-.8.88-1.35.16-.41.35-1.03.4-2.18.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.05-1.15-.24-1.77-.4-2.18a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.41-.16-1.03-.35-2.18-.4-1.24-.06-1.61-.07-4.76-.07Zm0 3.32a4.53 4.53 0 1 0 0 9.06 4.53 4.53 0 0 0 0-9.06Zm0 7.47a2.94 2.94 0 1 1 0-5.88 2.94 2.94 0 0 1 0 5.88Zm5.77-7.67a1.06 1.06 0 1 1-2.12 0 1.06 1.06 0 0 1 2.12 0Z"/></svg>
+        </a>
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@mathilde.ichiwrit" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.04-2.82h-3.1v12.4a2.6 2.6 0 0 1-2.6 2.5 2.6 2.6 0 0 1-.92-5.03v-3.2a5.7 5.7 0 1 0 6.62 5.63V8.9a7.34 7.34 0 0 0 4.28 1.37V7.18a4.28 4.28 0 0 1-3.24-1.36Z"/></svg>
+        </a>
+      </div>
+
+      <p class="brand-foot">Encré par Chemin</p>
+      <p>© 2026 Encré par Chemin — Tous droits réservés.</p>
+      <p class="note">Fichiers numériques — Usage strictement personnel.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

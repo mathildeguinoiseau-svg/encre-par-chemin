@@ -175,9 +175,12 @@
 
     .product-grid {
       display: grid;
-      /* responsive automatique : les cartes se réorganisent seules */
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 32px;
+      /* responsive automatique : les cartes se réorganisent seules.
+         Avec un seul produit, la carte est centrée et garde une largeur agréable.
+         Dès que tu ajoutes d'autres volumes, ils se placent côte à côte. */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 440px));
+      justify-content: center;
+      gap: 36px;
       margin-top: 44px;
     }
 

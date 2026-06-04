@@ -175,10 +175,9 @@
 
     .product-grid {
       display: grid;
-      /* responsive automatique : les cartes se réorganisent seules.
-         Avec un seul produit, la carte est centrée et garde une largeur agréable.
-         Dès que tu ajoutes d'autres volumes, ils se placent côte à côte. */
-      grid-template-columns: repeat(auto-fit, minmax(300px, 440px));
+      /* Un seul produit : une grande carte large, centrée, en 2 colonnes.
+         Dès que tu ajouteras d'autres volumes, ils passeront en grille. */
+      grid-template-columns: minmax(0, 920px);
       justify-content: center;
       gap: 36px;
       margin-top: 44px;
@@ -189,8 +188,9 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      /* deux colonnes : galerie à gauche, texte à droite */
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
       transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
 
@@ -198,6 +198,12 @@
       transform: translateY(-5px);
       box-shadow: var(--shadow);
       border-color: var(--gold-soft);
+    }
+
+    /* colonne gauche : la galerie */
+    .gallery {
+      background: var(--card);
+      border-right: 1px solid var(--border);
     }
 
     /* ─── GALERIE D'IMAGES PRODUIT ─── */
@@ -221,7 +227,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px;
-      padding: 6px 6px 0;
+      padding: 6px;
       background: var(--card);
     }
 
@@ -275,10 +281,10 @@
     }
 
     .product-body {
-      padding: 26px 24px 28px;
+      padding: 32px 30px 34px;
       display: flex;
       flex-direction: column;
-      flex: 1;
+      justify-content: center;
     }
 
     .product-tag {
@@ -455,8 +461,19 @@
     }
 
     /* ───────────────────────────────────────────────
-       RESPONSIVE (mobile)
+       RESPONSIVE (tablette & mobile)
        ─────────────────────────────────────────────── */
+
+    /* en dessous de 760px : la carte repasse en une seule colonne (image au-dessus du texte) */
+    @media (max-width: 760px) {
+      .product-card { grid-template-columns: 1fr; }
+      .gallery {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .product-body { padding: 26px 24px 30px; }
+    }
+
     @media (max-width: 620px) {
       header { padding: 52px 0 40px; }
       .steps { grid-template-columns: 1fr; gap: 28px; max-width: 340px; }

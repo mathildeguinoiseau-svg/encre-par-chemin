@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -9,11 +9,9 @@
   <!--
     ─────────────────────────────────────────────────────────────
     POLICE D'ÉCRITURE (facultatif)
-    On charge une seule police serif élégante (Cormorant Garamond)
-    pour les titres, qui rappelle l'univers littéraire / carnets.
+    Une seule police serif élégante (Cormorant Garamond) pour les
+    titres, qui rappelle l'univers littéraire / carnets.
     Le corps de texte reste en sans-serif système (propre et rapide).
-    👉 Si tu veux un site 100 % autonome (sans connexion), supprime
-       simplement la ligne <link> ci-dessous : un serif système prendra le relais.
     ─────────────────────────────────────────────────────────────
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,8 +31,8 @@
       --gold:        #b08d57;  /* doré : accents, filets, étiquettes */
       --gold-soft:   #d8c9ac;  /* doré clair */
       --border:      #ece8e1;  /* bordures fines */
-      --paypal:      #ffc439;  /* jaune PayPal */
-      --paypal-dark: #f3b400;  /* jaune PayPal au survol */
+      --paypal:      #ffc439;  /* jaune du bouton d'achat */
+      --paypal-dark: #f3b400;  /* jaune au survol */
       --shadow:      0 12px 30px rgba(45, 45, 45, 0.08);
 
       --serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
@@ -50,7 +48,6 @@
       font-family: var(--sans);
       color: var(--ink);
       background-color: var(--cream);
-      /* léger halo chaleureux en haut de page */
       background-image: radial-gradient(120% 60% at 50% -10%, #fdfcfa 0%, var(--cream) 60%);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
@@ -114,7 +111,6 @@
       margin-top: 6px;
     }
 
-    /* la grande image des cartes, sous le texte */
     .spirit-image {
       margin-top: 32px;
       border-radius: 12px;
@@ -191,7 +187,6 @@
       display: block;
     }
 
-    /* voile sombre doux pour la lisibilité du texte */
     .hero-frame::after {
       content: "";
       position: absolute;
@@ -356,7 +351,6 @@
       font-family: var(--serif);
     }
 
-    /* petit filet doré décoratif */
     .rule {
       width: 56px;
       height: 1px;
@@ -395,9 +389,7 @@
       margin: 0 auto;
     }
 
-    .step {
-      padding: 8px 6px;
-    }
+    .step { padding: 8px 6px; }
 
     .step-num {
       font-family: var(--serif);
@@ -426,191 +418,107 @@
     }
 
     /* ───────────────────────────────────────────────
-       GRILLE DE PRODUITS
+       BOUTIQUE — L'ÉTAGÈRE DE PLATEAUX (grille de produits)
        ─────────────────────────────────────────────── */
-    .shop {
-      padding: 72px 0 40px;
+    .shop { padding: 72px 0 40px; }
+
+    .shop-lead {
+      max-width: 620px;
+      margin: 8px auto 0;
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 1rem;
     }
 
-    .product-grid {
+    .shop-grid {
       display: grid;
-      /* Un seul produit : une grande carte large, centrée, en 2 colonnes.
-         Dès que tu ajouteras d'autres volumes, ils passeront en grille. */
-      grid-template-columns: minmax(0, 920px);
-      justify-content: center;
-      gap: 36px;
+      /* 3 colonnes sur ordinateur, 2 sur tablette, 1 sur mobile :
+         la grille s'adapte toute seule, pas besoin d'y toucher. */
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 28px;
       margin-top: 44px;
     }
 
-    .product-card {
+    .shop-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      /* deux colonnes : galerie à gauche, texte à droite */
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
 
-    .product-card:hover {
+    .shop-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow);
       border-color: var(--gold-soft);
     }
 
-    /* colonne gauche : la galerie */
-    .gallery {
-      background: var(--card);
-      border-right: 1px solid var(--border);
-    }
-
-    /* ─── GALERIE D'IMAGES PRODUIT ─── */
-
-    /* la grande image (format 16:9, comme tes covers Gumroad 1280×720) */
-    .product-image {
-      aspect-ratio: 16 / 9;
+    /* ─── LA COUVERTURE DU PRODUIT ───
+         👉 Une seule image par produit, déposée à la racine du dépôt.
+         Format conseillé : tes covers Gumroad ou une photo nette.
+         L'image est recadrée proprement dans un cadre uniforme. */
+    .shop-card .cover {
+      aspect-ratio: 4 / 3;
       background: #f4f1ea;
       overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
 
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;            /* l'image remplit joliment le cadre */
-      display: block;
-    }
-
-    /* la rangée de miniatures sous la grande image */
-    .product-thumbs {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      padding: 6px;
-      background: var(--card);
-    }
-
-    .product-thumbs label {
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      border-radius: 4px;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s ease, opacity 0.2s ease;
-      opacity: 0.7;
-    }
-
-    .product-thumbs label:hover { opacity: 1; }
-
-    .product-thumbs img {
+    .shop-card .cover img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    /*
-       Mécanique de la galerie SANS JavaScript :
-       les boutons radio (cachés) pilotent quelle grande image s'affiche.
-       Rien à modifier ici — il suffit de nommer tes images coffret-1..4.png
-    */
-    .gallery input { display: none; }
-
-    /* le carnet a des images en portrait : on les affiche en entier (sans rogner) */
-    .gallery-book .product-image {
-      background: #f6f2ea;
-    }
-    .gallery-book .product-image img {
-      object-fit: contain;
-      padding: 10px;
-    }
-    .gallery-book .product-thumbs img {
-      object-fit: contain;
-      background: #f6f2ea;
-    }
-
-    /* par défaut, on n'affiche que la 1re grande image */
-    .gallery .big-2,
-    .gallery .big-3,
-    .gallery .big-4 { display: none; }
-
-    /* quand une miniature est cochée, on montre la grande image correspondante */
-    #img-1:checked ~ .product-image .big-1 { display: block; }
-    #img-2:checked ~ .product-image .big-1 { display: none; }
-    #img-2:checked ~ .product-image .big-2 { display: block; }
-    #img-3:checked ~ .product-image .big-1 { display: none; }
-    #img-3:checked ~ .product-image .big-3 { display: block; }
-    #img-4:checked ~ .product-image .big-1 { display: none; }
-    #img-4:checked ~ .product-image .big-4 { display: block; }
-
-    /* la miniature active est mise en valeur (bordure dorée + pleine opacité) */
-    #img-1:checked ~ .product-thumbs label[for="img-1"],
-    #img-2:checked ~ .product-thumbs label[for="img-2"],
-    #img-3:checked ~ .product-thumbs label[for="img-3"],
-    #img-4:checked ~ .product-thumbs label[for="img-4"] {
-      opacity: 1;
-      border-color: var(--gold);
-    }
-
-    /* ─── même mécanique pour le 2e produit (le carnet) ─── */
-    .gallery .vbig-2,
-    .gallery .vbig-3,
-    .gallery .vbig-4 { display: none; }
-
-    #livre-img-1:checked ~ .product-image .vbig-1 { display: block; }
-    #livre-img-2:checked ~ .product-image .vbig-1 { display: none; }
-    #livre-img-2:checked ~ .product-image .vbig-2 { display: block; }
-    #livre-img-3:checked ~ .product-image .vbig-1 { display: none; }
-    #livre-img-3:checked ~ .product-image .vbig-3 { display: block; }
-    #livre-img-4:checked ~ .product-image .vbig-1 { display: none; }
-    #livre-img-4:checked ~ .product-image .vbig-4 { display: block; }
-
-    #livre-img-1:checked ~ .product-thumbs label[for="livre-img-1"],
-    #livre-img-2:checked ~ .product-thumbs label[for="livre-img-2"],
-    #livre-img-3:checked ~ .product-thumbs label[for="livre-img-3"],
-    #livre-img-4:checked ~ .product-thumbs label[for="livre-img-4"] {
-      opacity: 1;
-      border-color: var(--gold);
-    }
-
-    .product-body {
-      padding: 32px 30px 34px;
+    .shop-card .body {
+      padding: 24px 24px 26px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      flex: 1;
     }
 
-    .product-tag {
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
+    .shop-card .tag {
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .shop-card .title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.32rem;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .shop-card .collection {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
       margin-bottom: 12px;
     }
 
-    .product-title {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 1.5rem;
-      line-height: 1.2;
-      margin-bottom: 14px;
-    }
-
-    .product-desc {
+    .shop-card .desc {
       color: var(--ink-soft);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-      flex: 1;                      /* pousse le prix + bouton en bas */
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+      flex: 1; /* pousse le prix + bouton en bas, cartes alignées */
     }
 
-    .product-price {
+    .shop-card .price {
       font-family: var(--serif);
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-weight: 600;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    /* ─── BOUTON PAYPAL ─── */
+    /* ─── BOUTON D'ACHAT (GUMROAD) ─── */
     .btn-paypal {
       display: inline-flex;
       align-items: center;
@@ -659,7 +567,6 @@
       margin-top: 6px;
     }
 
-    /* ─── PHRASE D'INVITATION RÉSEAUX ─── */
     .socials-intro {
       color: var(--ink-soft);
       font-size: 0.92rem;
@@ -667,7 +574,6 @@
       margin: 0 auto 18px;
     }
 
-    /* ─── ICÔNES RÉSEAUX SOCIAUX ─── */
     .socials {
       display: flex;
       justify-content: center;
@@ -699,47 +605,8 @@
       fill: currentColor;
     }
 
-    /* ─── ENCART « CE QUE CONTIENT LE COFFRET » ─── */
-    .product-details {
-      background: #faf8f4;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px 20px;
-      margin-bottom: 22px;
-    }
-
-    .product-details h4 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-
-    .product-details ul {
-      list-style: none;
-      font-size: 0.9rem;
-      color: var(--ink-soft);
-    }
-
-    .product-details li {
-      padding: 5px 0;
-      border-bottom: 1px dotted var(--border);
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .product-details li:last-child { border-bottom: none; }
-
-    .product-details li span:last-child {
-      color: var(--gold);
-      white-space: nowrap;
-      font-variant-numeric: tabular-nums;
-    }
-
     /* ───────────────────────────────────────────────
        PETITE ANIMATION D'APPARITION À L'OUVERTURE
-       (discrète, dans l'esprit minimaliste)
        ─────────────────────────────────────────────── */
     @keyframes rise {
       from { opacity: 0; transform: translateY(14px); }
@@ -756,15 +623,7 @@
     /* ───────────────────────────────────────────────
        RESPONSIVE (tablette & mobile)
        ─────────────────────────────────────────────── */
-
-    /* en dessous de 760px : la carte repasse en une seule colonne (image au-dessus du texte) */
     @media (max-width: 760px) {
-      .product-card { grid-template-columns: 1fr; }
-      .gallery {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-      .product-body { padding: 26px 24px 30px; }
       .about-inner { grid-template-columns: 1fr; gap: 28px; }
       .about-photo { max-width: 360px; margin: 0 auto; aspect-ratio: 16 / 10; }
       .hero-frame { aspect-ratio: 16 / 10; }
@@ -774,7 +633,6 @@
       header { padding: 52px 0 40px; }
       .steps { grid-template-columns: 1fr; gap: 28px; max-width: 340px; }
       .shop  { padding: 52px 0 24px; }
-      .product-grid { gap: 24px; }
       .reassurance-grid { grid-template-columns: 1fr; gap: 32px; }
       .navbar .navbar-name { font-size: 1.15rem; }
       .spirit-card { padding: 32px 24px; }
@@ -785,8 +643,7 @@
 <body>
 
   <!-- ═══════════════ BARRE FIXE (LOGO) ═══════════════
-       👉 Dépose ton logo dans le dépôt en le nommant : logo.png
-       (idéalement un PNG rond sur fond transparent ou clair) -->
+       👉 logo.png à la racine du dépôt -->
   <nav class="navbar">
     <div class="navbar-inner">
       <img src="logo.png" alt="Logo Encré par Chemin" />
@@ -795,8 +652,7 @@
   </nav>
 
   <!-- ═══════════════ VISUEL D'ACCUEIL (HÉRO) ═══════════════
-       👉 Dépose ta belle image d'ambiance (SANS texte) en la nommant : hero.png
-       (format paysage, nette — ta bannière sans message convient parfaitement) -->
+       👉 hero.png à la racine (format paysage, sans texte) -->
   <section class="hero">
     <div class="hero-frame">
       <img src="hero.png" alt="L'atelier d'écriture — Encré par Chemin" />
@@ -821,7 +677,7 @@
   </header>
 
   <!-- ═══════════════ L'ESPRIT DE LA BOUTIQUE (philosophie) ═══════════════
-       👉 Dépose ton visuel des cartes en le nommant : apercu-cartes.png -->
+       👉 apercu-cartes.png à la racine -->
   <section class="spirit">
     <div class="spirit-card">
       <h2>L'esprit de la boutique</h2>
@@ -855,7 +711,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════ COMMENT ÇA MARCHE (choisir & payer) ═══════════════ -->
+  <!-- ═══════════════ COMMENT ÇA MARCHE ═══════════════ -->
   <section class="how">
     <div class="container">
       <h2 class="section-title">Comment ça marche</h2>
@@ -889,159 +745,131 @@
   <section class="shop">
     <div class="container">
       <h2 class="section-title" style="text-align:center;">La boutique</h2>
+      <p class="shop-lead">
+        Une étagère, et dessus des plateaux. Chacun mène un atelier précis —
+        de la préparation de l'intention jusqu'au jalon final du manuscrit.
+      </p>
 
-      <div class="product-grid">
-
-        <!--
-          ┌─────────────────────────────────────────────────────────┐
-          │  CARTE PRODUIT — Coffret Planches de Session (S1)         │
-          │  Pour ajouter d'autres produits plus tard :              │
-          │  copie/colle tout ce bloc <article class="product-card"> │
-          │  ... </article> et modifie l'image, le titre, le prix    │
-          │  et le lien Gumroad (href).                               │
-          └─────────────────────────────────────────────────────────┘
-        -->
-        <article class="product-card">
-
-          <!-- ─── GALERIE D'IMAGES ───
-               👉 Tu n'as RIEN à changer dans le code.
-               Il te suffit de déposer tes 4 images dans le dépôt (au même
-               niveau que index.html) en les nommant EXACTEMENT :
-                  coffret-1.png   (la grande affichée par défaut)
-                  coffret-2.png
-                  coffret-3.png
-                  coffret-4.png
-               Tes covers Gumroad (1280×720) conviennent parfaitement.
-               Clic sur une miniature = elle s'affiche en grand. -->
-          <div class="gallery">
-            <!-- boutons radio cachés qui pilotent l'affichage (le 1er est coché) -->
-            <input type="radio" name="galerie-s1" id="img-1" checked />
-            <input type="radio" name="galerie-s1" id="img-2" />
-            <input type="radio" name="galerie-s1" id="img-3" />
-            <input type="radio" name="galerie-s1" id="img-4" />
-
-            <!-- la grande image (les 4 sont là, une seule s'affiche à la fois) -->
-            <div class="product-image">
-              <img class="big-1" src="coffret-1.png" alt="Coffret Planches de Session S1 — visuel 1" />
-              <img class="big-2" src="coffret-2.png" alt="Coffret Planches de Session S1 — visuel 2" />
-              <img class="big-3" src="coffret-3.png" alt="Coffret Planches de Session S1 — visuel 3" />
-              <img class="big-4" src="coffret-4.png" alt="Coffret Planches de Session S1 — visuel 4" />
-            </div>
-
-            <!-- les miniatures cliquables sous la grande image -->
-            <div class="product-thumbs">
-              <label for="img-1"><img src="coffret-1.png" alt="Aperçu 1" /></label>
-              <label for="img-2"><img src="coffret-2.png" alt="Aperçu 2" /></label>
-              <label for="img-3"><img src="coffret-3.png" alt="Aperçu 3" /></label>
-              <label for="img-4"><img src="coffret-4.png" alt="Aperçu 4" /></label>
-            </div>
-          </div>
-
-          <div class="product-body">
-            <p class="product-tag">Outils d'écriture</p>
-            <h3 class="product-title">Coffret « Encré par Chemin »<br />Planches de Session — S1</h3>
-            <p class="product-desc">
-              L'environnement préparé de l'auteur·ice. Un ensemble de supports
-              imprimables pour nommer vos séances (geste + matière), installer
-              votre plateau d'écriture et surmonter la page blanche.
-            </p>
-
-            <!-- ─── DÉTAIL DU CONTENU (façon fiche matériel) ─── -->
-            <div class="product-details">
-              <h4>Ce que contient le coffret</h4>
-              <ul>
-                <li><span>Cartes « phases » du travail</span><span>6 cartes</span></li>
-                <li><span>Cartes « éléments » du récit</span><span>7 cartes</span></li>
-                <li><span>Cartes-minuteur (25 · 30 · 50 min)</span><span>3 cartes</span></li>
-                <li><span>Pastilles rondes à coller au carnet</span><span>1 planche</span></li>
-                <li><span>Fiches de suivi journalières</span><span>4 / page</span></li>
-                <li><span>Versions couleur &amp; noir et blanc</span><span>PDF</span></li>
-              </ul>
-            </div>
-
-            <p class="product-price">2,99 €</p>
-
-            <!-- ─── BOUTON D'ACHAT (GUMROAD) ───
-                 👉 Ton lien de vente Gumroad est déjà branché ci-dessous.
-                 Pour changer de produit plus tard, remplace simplement l'URL du href.
-                 (Astuce : tu peux rendre le lien plus lisible en renommant l'URL
-                  du produit dans Gumroad, ex. .../l/coffret-s1) -->
-            <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/rwrzw" target="_blank" rel="noopener">
-              Acheter le PDF
-            </a>
-          </div>
-
-        </article>
-        <!-- ── FIN DE LA CARTE PRODUIT ── -->
+      <div class="shop-grid">
 
         <!--
           ┌─────────────────────────────────────────────────────────┐
-          │  CARTE PRODUIT 2 — CARNETS · Avant d'écrire · Volume 1    │
+          │  POUR AJOUTER UN PRODUIT PLUS TARD :                      │
+          │  copie/colle un bloc <article class="shop-card">…        │
+          │  </article>, puis change l'image (src), le tag, le titre, │
+          │  la description, le prix et le lien Gumroad (href).       │
           └─────────────────────────────────────────────────────────┘
         -->
-        <article class="product-card">
 
-          <!-- ─── GALERIE D'IMAGES ───
-               👉 Dépose tes 4 images dans le dépôt en les nommant EXACTEMENT :
-                  livre-1.png   (la couverture, affichée par défaut)
-                  livre-2.png   (page 1)
-                  livre-3.png   (page 2)
-                  livre-4.png   (page 3) -->
-          <div class="gallery gallery-book">
-            <input type="radio" name="galerie-v1" id="livre-img-1" checked />
-            <input type="radio" name="galerie-v1" id="livre-img-2" />
-            <input type="radio" name="galerie-v1" id="livre-img-3" />
-            <input type="radio" name="galerie-v1" id="livre-img-4" />
-
-            <div class="product-image">
-              <img class="vbig-1" src="livre-1.png" alt="CARNETS Volume 1 — couverture" />
-              <img class="vbig-2" src="livre-2.png" alt="CARNETS Volume 1 — aperçu page 1" />
-              <img class="vbig-3" src="livre-3.png" alt="CARNETS Volume 1 — aperçu page 2" />
-              <img class="vbig-4" src="livre-4.png" alt="CARNETS Volume 1 — aperçu page 3" />
-            </div>
-
-            <div class="product-thumbs">
-              <label for="livre-img-1"><img src="livre-1.png" alt="Couverture" /></label>
-              <label for="livre-img-2"><img src="livre-2.png" alt="Aperçu page 1" /></label>
-              <label for="livre-img-3"><img src="livre-3.png" alt="Aperçu page 2" /></label>
-              <label for="livre-img-4"><img src="livre-4.png" alt="Aperçu page 3" /></label>
-            </div>
+        <!-- 1 ─── CARNETS — Avant d'écrire · Volume 1 ───
+             👉 image : livre-1.png -->
+        <article class="shop-card">
+          <div class="cover">
+            <img src="livre-1.png" alt="CARNETS — Avant d'écrire · Volume 1" />
           </div>
-
-          <div class="product-body">
-            <p class="product-tag">Guide de réflexion</p>
-            <h3 class="product-title">CARNETS — Avant d'écrire<br />Volume 1</h3>
-            <p class="product-desc">
-              Au départ, ce devait être un simple planner. Au fil des pages,
-              c'est devenu autre chose : un guide qui vous accompagne avant même
-              d'écrire la première ligne — pour poser les bonnes questions,
-              clarifier votre intention et définir ce que vous voulez vraiment
-              donner avec votre roman.
+          <div class="body">
+            <p class="tag">Guide de réflexion</p>
+            <h3 class="title">CARNETS — Avant d'écrire · Vol. 1</h3>
+            <p class="collection">Collection Encre et Parchemin · vol. 1 / 12</p>
+            <p class="desc">
+              Un guide qui vous accompagne avant même la première ligne : poser
+              votre intention, clarifier le genre, le thème, le lecteur que vous
+              imaginez — pour savoir ce que vous voulez vraiment donner.
             </p>
-
-            <!-- ─── DÉTAIL DU CONTENU ─── -->
-            <div class="product-details">
-              <h4>Ce que contient ce volume</h4>
-              <ul>
-                <li><span>Réflexion guidée</span><span>10 pages</span></li>
-                <li><span>Genre, intrigue, lecteur imaginaire</span><span>inclus</span></li>
-                <li><span>Identité d'auteur·ice &amp; thème central</span><span>inclus</span></li>
-                <li><span>Romans de référence &amp; objectifs</span><span>inclus</span></li>
-                <li><span>Collection « Encre et Parchemin »</span><span>Vol. 1/12</span></li>
-                <li><span>Format à compléter dans votre carnet</span><span>PDF</span></li>
-              </ul>
-            </div>
-
-            <p class="product-price">3,99 €</p>
-
-            <!-- ─── BOUTON D'ACHAT (GUMROAD) ─── -->
+            <p class="price">3,99 €</p>
             <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/idavua" target="_blank" rel="noopener">
               Acheter le PDF
             </a>
           </div>
-
         </article>
-        <!-- ── FIN DE LA CARTE PRODUIT 2 ── -->
+
+        <!-- 2 ─── Coffret « Planches de Session » — S1 ───
+             👉 image : coffret-1.png -->
+        <article class="shop-card">
+          <div class="cover">
+            <img src="coffret-1.png" alt="Coffret Planches de Session — S1" />
+          </div>
+          <div class="body">
+            <p class="tag">Plateau de l'écriture intentionnelle</p>
+            <h3 class="title">Coffret « Planches de Session » — S1</h3>
+            <p class="collection">Le plateau qu'on sort pour écrire, même sans envie</p>
+            <p class="desc">
+              Des cartes imprimables pour nommer chaque séance (geste + matière),
+              installer votre plateau d'écriture et surmonter la page blanche.
+              Versions couleur et noir &amp; blanc.
+            </p>
+            <p class="price">2,99 €</p>
+            <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/rwrzw" target="_blank" rel="noopener">
+              Acheter le PDF
+            </a>
+          </div>
+        </article>
+
+        <!-- 3 ─── La Carte du Chapitre ───
+             👉 image : carte-chapitre.png -->
+        <article class="shop-card">
+          <div class="cover">
+            <img src="carte-chapitre.png" alt="La Carte du Chapitre — cartes-questions" />
+          </div>
+          <div class="body">
+            <p class="tag">Plateau · cartes-questions</p>
+            <h3 class="title">La Carte du Chapitre</h3>
+            <p class="collection">Démêler un chapitre complexe, avant de l'écrire</p>
+            <p class="desc">
+              Un jeu de cartes à lire — jamais à remplir — pour clarifier un chapitre :
+              le cadre, le cœur, ce qu'il installe, sa couleur, son lecteur. Vous lisez
+              les questions, vous écrivez vos réponses dans votre carnet.
+            </p>
+            <p class="price">4,99 €</p>
+            <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/xaxbar" target="_blank" rel="noopener">
+              Acheter le PDF
+            </a>
+          </div>
+        </article>
+
+        <!-- 4 ─── Les Bornes du Manuscrit · Les mois de l'année ───
+             👉 image : bornes-mois.png -->
+        <article class="shop-card">
+          <div class="cover">
+            <img src="bornes-mois.png" alt="Les Bornes du Manuscrit — Les mois de l'année" />
+          </div>
+          <div class="body">
+            <p class="tag">Les Bornes du Manuscrit</p>
+            <h3 class="title">Les mois de l'année</h3>
+            <p class="collection">Pochette nº 1 · le temps long</p>
+            <p class="desc">
+              Des languettes adhésives à poser sur la tranche du carnet, une par mois —
+              pour jalonner le chemin du manuscrit, à la manière des cailloux blancs
+              du Petit Poucet. Non pour se mesurer, mais pour retrouver son chemin.
+            </p>
+            <p class="price">2,99 €</p>
+            <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/yovff" target="_blank" rel="noopener">
+              Acheter le PDF
+            </a>
+          </div>
+        </article>
+
+        <!-- 5 ─── Les Bornes du Manuscrit · Les semaines ───
+             👉 image : bornes-semaines.png -->
+        <article class="shop-card">
+          <div class="cover">
+            <img src="bornes-semaines.png" alt="Les Bornes du Manuscrit — Les semaines" />
+          </div>
+          <div class="body">
+            <p class="tag">Les Bornes du Manuscrit</p>
+            <h3 class="title">Les semaines</h3>
+            <p class="collection">Pochette nº 2 · le rythme court</p>
+            <p class="desc">
+              Une languette par semaine, l'avancée visible au bord des pages —
+              le rythme court qui dit, d'un simple coup d'œil, où en est
+              votre premier jet.
+            </p>
+            <p class="price">2,99 €</p>
+            <a class="btn-paypal" href="https://ichiwrites.gumroad.com/l/xlqxjj" target="_blank" rel="noopener">
+              Acheter le PDF
+            </a>
+          </div>
+        </article>
 
       </div>
     </div>
@@ -1079,7 +907,7 @@
   </section>
 
   <!-- ═══════════════ À PROPOS ═══════════════
-       👉 Dépose ta photo (toi ou ton plateau) en la nommant : apropos.png -->
+       👉 apropos.png à la racine -->
   <section class="about">
     <div class="about-inner">
       <div class="about-photo">
@@ -1104,9 +932,6 @@
   <footer>
     <div class="container">
 
-      <!-- ─── INVITATION + RÉSEAUX SOCIAUX ───
-           👉 Tes 3 liens sont déjà branchés ci-dessous.
-           Pour les modifier un jour, change l'URL dans chaque href. -->
       <p class="socials-intro">
         Retrouvez mes sessions d'écriture en vidéo : comment j'organise
         mon plateau et j'utilise les cartes, jour après jour.
